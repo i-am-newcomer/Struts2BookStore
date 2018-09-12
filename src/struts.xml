@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="default" extends="struts-default">
+		
+		<global-results>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<action name="checkcode" class="com.zy.action.ImageAction" method="checkcode" />
+	
+		<action name="register" class="com.zy.action.UserAction" method="register">
+			<result>/register_success.jsp</result>
+			<result name="error">/register.jsp</result>
+		</action>
+	
+		<action name="beforeLogin" class="com.zy.action.UserAction" method="beforeLogin">
+			<result name="success">/login_success.jsp</result>
+		</action>
+		
+		<action name="login" class="com.zy.action.UserAction" method="login">
+			<result>/login_success.jsp</result>
+		</action>
+		
+		<action name="logout" class="com.zy.action.UserAction" method="logout" />
+		
+		<action name="showbook" class="com.zy.action.BookAction" method="showbook">
+			<result>/book.jsp</result>
+			<result name="error">/showerror.jsp</result>
+		</action>
+		
+		<action name="addCart" class="com.zy.action.CartAction" method="addCart">
+			<result>/addsuccess.jsp</result>
+			<result name="error">/addfail.jsp</result>
+		</action>
+		
+		<action name="getCart" class="com.zy.action.CartAction" method="getCart">
+			<result>/shoppingcart.jsp</result>
+		</action>
+		
+	</package>
+
+</struts>
