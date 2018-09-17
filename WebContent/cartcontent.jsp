@@ -3,6 +3,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 
 <style type="text/css">
@@ -123,6 +124,8 @@ a.checknow{
 		<td ><span class="cart_column">金额（元）</span></td>
 		<td ><span class="cart_column">操作</span></td>
 	</tr>
+	
+	<!-- 通过EL表达式获取  -->	
 	<c:if test="${!empty cartMap}">
 		<c:forEach items="${cartMap}" var="item">
 			<tr align="center">
@@ -140,5 +143,24 @@ a.checknow{
 			</tr>
 		</c:forEach>
 	</c:if>
-
+	
+	<!-- 通过OGNL表达式获取，但是在计算总价格时，ognl表示式无法像EL表达式一样通过算术运算符直接计算得到 -->
+<%-- 	<s:if test="cartMap!=null">
+		<s:iterator value="cartMap" var="cart">
+			<tr align="center">
+				<td width="5%" ><a href="" class="cart_select checknow check_on">选中</a></td>
+				<td width="15%" ><img alt="<s:property value='#cart.value.name'/>" src="images/<s:property value='#cart.value.image'/>" class="cart_image"></td>
+				<td align="left" width="40%" ><a href="showbook?book_id=<s:property value='#cart.value.id'/>" class="cart_name"><s:property value='#cart.value.name'/>(<s:property value='#cart.value.intro'/>)</a></td>
+				<td width="10%" ><span class="cart_price"><s:property value='#cart.value.price'/></span></td>
+				<td width="10%">
+					<a href="" class="cart_quantity">-</a>
+					<input type="text" name="cart_book_quantity" value="<s:property value='#cart.key.bookquantity'/>" class="cart_input">
+					<a href="" class="cart_quantity">+</a>
+				</td>
+				<td width="10%" ><span class="cart_totalprice">0 </span></td>
+				<td width="10%"><a href="" class="cart_delete">删除</a></td>
+			</tr>
+		</s:iterator>
+	</s:if>
+ --%>
 </table>

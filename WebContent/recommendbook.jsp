@@ -14,6 +14,7 @@
 .price1{
 	color:#ff0000;
 	font-size:15px;
+	text-decoration:line-through;
 }
 
 .price2{

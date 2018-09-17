@@ -6,6 +6,21 @@
 
 <struts>
 	<package name="default" extends="struts-default">
+	
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.zy.interceptor.LoginInterceptor" />
+			<interceptor name="CheckCodeInterceptor" class="com.zy.interceptor.CheckCodeInterceptor" />
+			
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="checkcodeStack">
+				<interceptor-ref name="CheckCodeInterceptor" />
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
 		
 		<global-results>
 			<result name="login">/login.jsp</result>
@@ -15,15 +30,19 @@
 	
 		<action name="register" class="com.zy.action.UserAction" method="register">
 			<result>/register_success.jsp</result>
-			<result name="error">/register.jsp</result>
+			<result name="input">/register.jsp</result>
+			<interceptor-ref name="checkcodeStack" />
 		</action>
-	
+		
 		<action name="beforeLogin" class="com.zy.action.UserAction" method="beforeLogin">
-			<result name="success">/login_success.jsp</result>
+			<result>/login_success.jsp</result>
+			<interceptor-ref name="loginStack" />
 		</action>
 		
 		<action name="login" class="com.zy.action.UserAction" method="login">
 			<result>/login_success.jsp</result>
+			<result name="input">/login.jsp</result>
+			<interceptor-ref name="checkcodeStack" />
 		</action>
 		
 		<action name="logout" class="com.zy.action.UserAction" method="logout" />
@@ -36,12 +55,12 @@
 		<action name="addCart" class="com.zy.action.CartAction" method="addCart">
 			<result>/addsuccess.jsp</result>
 			<result name="error">/addfail.jsp</result>
+			<interceptor-ref name="loginStack" />
 		</action>
 		
 		<action name="getCart" class="com.zy.action.CartAction" method="getCart">
 			<result>/shoppingcart.jsp</result>
+			<interceptor-ref name="loginStack" />
 		</action>
-		
 	</package>
-
 </struts>

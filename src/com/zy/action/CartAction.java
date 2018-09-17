@@ -22,9 +22,9 @@ public class CartAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpSession session = request.getSession();
 		user = (User)session.getAttribute("user");
-		if(user == null) {
+	/*	if(user == null) {
 			return Action.LOGIN;
-		}
+		}*/
 		String book_id = request.getParameter("book_id");
 		String book_quantity = request.getParameter("book_quantity");
 		String cust_id = String.valueOf(user.getId());
@@ -37,15 +37,16 @@ public class CartAction {
 	
 	public String getCart() {
 		user = (User)ServletActionContext.getRequest().getSession().getAttribute("user");
-		if(user != null) {
+		String cust_id = String.valueOf(user.getId());
+		cartMap = cartservices.getOrderMap(cust_id);
+		return Action.SUCCESS;
+
+	/*	if(user != null) {
 			String cust_id = String.valueOf(user.getId());
 			cartMap = cartservices.getOrderMap(cust_id);
 			return Action.SUCCESS;
 		}
-		return Action.LOGIN;
-		
-		
-		
+		return Action.LOGIN;*/
 	}
 
 	public User getUser() {

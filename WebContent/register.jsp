@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +20,13 @@
 		<form action="register.action" method="post">
 			<table width="80%" rules="none" border="0" align="center">
 				<tr><td colspan="3" align="center"><h1>注册新用户</h1></td></tr>
-				<tr><td colspan="3" align="center"><h3>${requestScope.register_result}</h3></td></tr>
+				
+				<!-- 通过EL表达式获取 -->
+	<%-- 			<tr><td colspan="3" align="center"><h3>${requestScope.register_result}</h3></td></tr> --%>
+				<!-- 通过OGNL表达式获取 -->
+				<tr><td colspan="3" align="center"><h3><s:actionerror/></h3></td></tr>
+				<tr><td colspan="3" align="center"><h3><s:property value="#request.checkcode_result"/></h3></td></tr>
+				
 				<tr>
 					<td align="right" width="30%"><span>邮箱</span></td>
 					<td align="left" width="70%" colspan="2"><input type="text" name="user.email" placeholder="邮箱账号" style="width:250px;height:25px;margin:5px;"/></td>
@@ -41,7 +49,7 @@
 				</tr>
 				<tr>
 					<td align="right" width="40%"><img alt="checkcode" src="checkcode.action"></td>
-					<td align="left" width="20%"><input type="text" name="register_checkcode" style="width:200px;height:25px;margin:5px;"></td>
+					<td align="left" width="20%"><input type="text" name="in_checkcode" style="width:200px;height:25px;margin:5px;"></td>
 					<td align="left" width="40%"><a href="" onclick="myReload()" style="color:red">看不清，换一张</a></td>
 				</tr>
 				<tr><td colspan="3" align="center"><input type="submit" value="注册" style="width:150px;height:32px;margin:5px;background-color:#4688F1;color:#ffffff"/></td></tr>
